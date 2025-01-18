@@ -31,7 +31,7 @@ function calculateAge() {
     }
 
     
-    if (dayNum < 1 || dayNum > 31) {
+    if (dayNum < 0  || dayNum > 31 ) {
         alert('Invalid day. Please enter a day between 1 and 31.');
         return;
     }
