@@ -1,27 +1,54 @@
 function calculateAge() {
-    // Get the input values
     const day = document.getElementById('day').value;
     const month = document.getElementById('month').value;
     const year = document.getElementById('year').value;
 
-    // Create a date object with the user's birthdate
-    const birthDate = new Date(year, month - 1, day);
+
+    if (!day || !month || !year) {
+        alert('Please enter a valid date.');
+        return;
+    }
+
+    const dayNum = parseInt(day, 10);
+    const monthNum = parseInt(month, 10);
+    const yearNum = parseInt(year, 10);
+
+    
+    if (monthNum < 1 || monthNum > 12) {
+        alert('Invalid month. Please enter a month between 1 and 12.');
+        return;
+    }
+
+    if (dayNum < 1 || dayNum > 31) {
+        alert('Invalid day. Please enter a day between 1 and 31.');
+        return;
+    }
+
+    
+    const isValidDate = (monthNum === 2 && dayNum > 29 && !isLeapYear(yearNum)) ||
+                        ([4, 6, 9, 11].includes(monthNum) && dayNum > 30);
+
+    if (isValidDate) {
+        alert('Invalid date for the given month. Please check your input.');
+        return;
+    }
+
+    const birthDate = new Date(yearNum, monthNum - 1, dayNum);
     const today = new Date();
 
-    // Calculate the age
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDiff = today.getMonth() - birthDate.getMonth();
 
-    // Adjust the age if the birthday hasn't occurred yet this year
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
 
-    // Display the result
     document.getElementById('result').textContent = `You are ${age} years old.`;
-
-    // Display current time
     displayCurrentTime();
+}
+
+function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
 }
 
 function displayCurrentTime() {
@@ -40,10 +67,6 @@ function displayCurrentTime() {
     } else {
         timeElement.textContent = timeString;
     }
-    // Update the time every second
-setInterval(displayCurrentTime, 1000);
-
 }
 
-// Update the time every second
 setInterval(displayCurrentTime, 1000);
