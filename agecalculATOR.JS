@@ -3,7 +3,7 @@ function calculateAge() {
     const month = document.getElementById('month').value;
     const year = document.getElementById('year').value;
 
-
+    // Validate input
     if (!day || !month || !year) {
         alert('Please enter a valid date.');
         return;
@@ -13,18 +13,25 @@ function calculateAge() {
     const monthNum = parseInt(month, 10);
     const yearNum = parseInt(year, 10);
 
-    
+    // Check for valid year (four digits)
+    if (yearNum < 1000 || yearNum > 9999) {
+        alert('Invalid year. Please enter a four-digit year.');
+        return;
+    }
+
+    // Check for valid month
     if (monthNum < 1 || monthNum > 12) {
         alert('Invalid month. Please enter a month between 1 and 12.');
         return;
     }
 
+    // Check for valid day
     if (dayNum < 1 || dayNum > 31) {
         alert('Invalid day. Please enter a day between 1 and 31.');
         return;
     }
 
-    
+    // Check for valid day in the month
     const isValidDate = (monthNum === 2 && dayNum > 29 && !isLeapYear(yearNum)) ||
                         ([4, 6, 9, 11].includes(monthNum) && dayNum > 30);
 
