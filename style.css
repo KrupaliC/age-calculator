@@ -34,14 +34,43 @@ input {
     padding: 5px;
     width: 100px;
 }
+button:before{
+    transition:  0.5s all ease;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    opacity: 0;
+    content: '';
+    background-color:#0ef;
+    z-index: -1;
+}
+button:hover,button:focus:before{
+    transition: 0.5s all ease;
+    left:0;
+    right:0;
+    opacity: 1;
+}
+button:active{
+    transform: scale(0.9);
+}
 
 button {
+    display: inline;
+    font-weight: bold;
     padding: 10px 20px;
     font-size: 16px;
     background-color: #4caf50;
-    color: white;
-    border: none;
+    color: #0ef(255, 255, 255);
+    border-radius: 2px ;
+    border: #0ef(122, 24, 53);
     cursor: pointer;
+    box-shadow:  0 2px 10px #0ef(0, 0, 0, 0.16),
+    0 3px 6px #0ef(0, 0, 0, 0.1);
+    transition:  0.3s ease all;
+    z-index: 1;
+
 }
 
 button:hover {
